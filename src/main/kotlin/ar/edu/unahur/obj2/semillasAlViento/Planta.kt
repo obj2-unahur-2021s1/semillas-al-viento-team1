@@ -30,10 +30,11 @@ class Soja(anioObtencionSemilla: Int, altura: Float, val esTransgenica: Boolean)
 
 
   override fun daSemillas(): Boolean  {
+
     if (this.esTransgenica) {
       return false
     }
-
+     //Cohesion este metodo resuelve muchas tareas
     return this.esFuerte() || (this.anioObtencionSemilla > 2007 && this.altura > 1)
   }
 }

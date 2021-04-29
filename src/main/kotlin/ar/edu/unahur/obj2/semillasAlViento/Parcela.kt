@@ -2,12 +2,14 @@ package ar.edu.unahur.obj2.semillasAlViento
 
 class Parcela(val ancho: Int, val largo: Int, val horasSolPorDia: Int) {
   val plantas = mutableListOf<Planta>()
+  //Redundancia Minima ya que es innecesario una variable cantidad de plantas
   var cantidadPlantas = 0
-
+  //Simplicidad
   fun superficie() = ancho * largo
+  //Cohesion resuelve muchas tareas.no hace subtareas
   fun cantidadMaximaPlantas() =
     if (ancho > largo) ancho * largo / 5 else ancho * largo / 3 + largo
-
+    //Robustez habertencia de errores
   fun plantar(planta: Planta) {
     if (cantidadPlantas == this.cantidadMaximaPlantas()) {
       println("Ya no hay lugar en esta parcela")
