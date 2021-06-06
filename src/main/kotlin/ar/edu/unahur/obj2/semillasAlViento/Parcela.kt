@@ -8,7 +8,7 @@ class Parcela(val ancho: Int, val largo: Int, val horasSolPorDia: Int) {
   fun superficie() = ancho * largo
   //Cohesion resuelve muchas tareas.no hace subtareas
   fun cantidadMaximaPlantas() =
-    if (ancho > largo) ancho * largo / 5 else ancho * largo / 3 + largo
+    if (ancho > largo) this.superficie() / 5 else this.superficie() / 3 + largo
     //Robustez habertencia de errores
   fun plantar(planta: Planta) {
     if (cantidadPlantas == this.cantidadMaximaPlantas()) {
@@ -20,6 +20,7 @@ class Parcela(val ancho: Int, val largo: Int, val horasSolPorDia: Int) {
       cantidadPlantas += 1
     }
   }
+  fun tieneComplicaciones() = plantas.any { it.horasDeSolQueTolera() < horasSolPorDia }
 }
 
 class Agricultora(val parcelas: MutableList<Parcela>) {

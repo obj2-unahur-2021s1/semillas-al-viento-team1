@@ -1,30 +1,52 @@
 package ar.edu.unahur.obj2.semillasAlViento
 
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
 class SemillasTest : DescribeSpec({
-    val plantaDeMenta=Menta(3,2.60)
-    val plantaSojaComun=Soja(2020,3.60,true)
-    val plantaSojaTransgenica=Soja(2019,4.6,false)
-    describe("Si una planta da semillas")
+    describe(("Semillas al viento"))
     {
-            plantaDeMenta.daSemillas().shouldBe(true)
-            plantaSojaComun.daSemillas().shouldBe(true)
-            plantaSojaTransgenica.daSemillas().shouldBe(false)
-    }
-    describe(("Si una planta es fuerte"))
-    {
-        plantaDeMenta.esFuerte().shouldBe(true)
-        plantaSojaComun.esFuerte().shouldBe(true)
-        plantaSojaTransgenica.esFuerte().shouldBe(false)
+        val plantaDeMenta = Menta(3, 2.60f)
+        val plantaSojaComun = Soja(2020, 3.60f, false)
+        val plantaSojaTransgenica = Soja(2019, 4.6f, true)
+        it("Si dan semillas")
+        {
+            plantaDeMenta.daSemillas().shouldBeTrue()
+            plantaSojaComun.daSemillas().shouldBeTrue()
+            plantaSojaTransgenica.daSemillas().shouldBeFalse()
+        }
+        it("Son fuertes")
+        {
+            plantaDeMenta.esFuerte().shouldBeFalse()
+            plantaSojaComun.esFuerte().shouldBeFalse()
+            plantaSojaTransgenica.esFuerte().shouldBeTrue()
+        }
+        describe("parcela") {
+            val parcela1 = Parcela(5, 4, 10)
+            val parcela2 = Parcela(3, 4, 4)
+
+            parcela1.plantar(plantaDeMenta)
+            parcela1.plantar(plantaSojaComun)
+            parcela2.plantar(plantaSojaTransgenica)
+            parcela2.plantar(plantaSojaComun)
+
+            it("superficie") {
+                parcela1.superficie().shouldBe(20)
+                parcela2.superficie().shouldBe(12)
+            }
+            it("cantidad maxima de plantas") {
+                parcela1.cantidadMaximaPlantas().shouldBe(4)
+                parcela2.cantidadMaximaPlantas().shouldBe(8)
+            }
+            
+            it("tiene complicaciones") { //No existe la funcion para el test
+                parcela1.tieneComplicaciones().shouldBeFalse()
+                parcela1.plantar(plantaSojaTransgenica)
+                parcela1.tieneComplicaciones().shouldBeTrue()
+                parcela2.tieneComplicaciones().shouldBeTrue()
+            }
+        }
 
     }
-
-
-
-
-
-
-
-
 })
