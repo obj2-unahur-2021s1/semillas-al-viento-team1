@@ -10,6 +10,15 @@ class SemillasTest : DescribeSpec({
         val plantaDeMenta = Menta(3, 2.60f)
         val plantaSojaComun = Soja(2020, 3.60f, false)
         val plantaSojaTransgenica = Soja(2019, 4.6f, true)
+        val parcela1 = Parcela(5, 4, 10)
+        val parcela2 = Parcela(3, 4, 4)
+        val agricultor1 = Agricultora([])
+        val agricultor2= Agricultora([parcela1])
+
+        parcela1.plantar(plantaDeMenta)
+        parcela1.plantar(plantaSojaComun)
+        parcela2.plantar(plantaSojaTransgenica)
+        parcela2.plantar(plantaSojaComun)
         it("Si dan semillas")
         {
             plantaDeMenta.daSemillas().shouldBeTrue()
@@ -22,15 +31,8 @@ class SemillasTest : DescribeSpec({
             plantaSojaComun.esFuerte().shouldBeFalse()
             plantaSojaTransgenica.esFuerte().shouldBeTrue()
         }
-        describe("parcela") {
-            val parcela1 = Parcela(5, 4, 10)
-            val parcela2 = Parcela(3, 4, 4)
-
-            parcela1.plantar(plantaDeMenta)
-            parcela1.plantar(plantaSojaComun)
-            parcela2.plantar(plantaSojaTransgenica)
-            parcela2.plantar(plantaSojaComun)
-
+        describe("Requerimientos de parcelas")
+        {
             it("superficie") {
                 parcela1.superficie().shouldBe(20)
                 parcela2.superficie().shouldBe(12)
@@ -46,6 +48,11 @@ class SemillasTest : DescribeSpec({
                 parcela1.tieneComplicaciones().shouldBeTrue()
                 parcela2.tieneComplicaciones().shouldBeTrue()
             }
+        }
+        describe("Requerimientos de agricultores")
+        {
+            agricultor1.parcelasSemilleras().shouldBe([parcela1,parcela2])
+
         }
 
     }

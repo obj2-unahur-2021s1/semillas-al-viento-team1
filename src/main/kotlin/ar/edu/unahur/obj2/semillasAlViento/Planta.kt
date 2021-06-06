@@ -39,7 +39,11 @@ class Soja(anioObtencionSemilla: Int, altura: Float, val esTransgenica: Boolean)
       if (this.esTransgenica) {
           return false
       }
+      else
+      {
+          return this.esTransgenica || this.esFuerte() || (this.anioObtencionSemilla > 2007 && this.altura > 1)
+      }
 
-      return this.esFuerte() || (this.anioObtencionSemilla > 2007 && this.altura > 1)
+
   }
 }
