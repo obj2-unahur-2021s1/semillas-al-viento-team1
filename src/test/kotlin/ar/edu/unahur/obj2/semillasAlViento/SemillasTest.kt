@@ -12,12 +12,13 @@ class SemillasTest : DescribeSpec({
         val plantaSojaTransgenica = Soja(2019, 4.6f, true)
         val parcela1 = Parcela(5, 4, 10)
         val parcela2 = Parcela(3, 4, 4)
-        val agricultor1 = Agricultora([])
-        val agricultor2= Agricultora([parcela1])
+        val agricultor1 = Agricultora(mutableListOf(parcela1))
+        val agricultor3 = Agricultora(mutableListOf(parcela2))
+        val agricultor2= Agricultora(mutableListOf(parcela1,parcela2))
 
-        parcela1.plantar(plantaDeMenta)
-        parcela1.plantar(plantaSojaComun)
-        parcela2.plantar(plantaSojaTransgenica)
+
+        parcela1.plantar(plantaSojaTransgenica)
+        parcela2.plantar(plantaDeMenta)
         parcela2.plantar(plantaSojaComun)
         it("Si dan semillas")
         {
@@ -51,8 +52,9 @@ class SemillasTest : DescribeSpec({
         }
         describe("Requerimientos de agricultores")
         {
-            agricultor1.parcelasSemilleras().shouldBe([parcela1,parcela2])
 
+            agricultor1.parcelasSemilleras().shouldBe(mutableListOf())
+            agricultor2.parcelasSemilleras().shouldBe(mutableListOf(parcela2))
         }
 
     }
