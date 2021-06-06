@@ -23,7 +23,8 @@ class Soja(anioObtencionSemilla: Int, altura: Float, val esTransgenica: Boolean)
   override fun horasDeSolQueTolera(): Int  {
     // ¡Magia de Kotlin! El `when` es como un `if` pero más poderoso:
     // evalúa cada línea en orden y devuelve lo que está después de la flecha.
-    val horasBase = when {
+
+      val horasBase = when {
       altura < 0.5  -> 6
       altura < 1    -> 7
       else          -> 9
@@ -31,7 +32,6 @@ class Soja(anioObtencionSemilla: Int, altura: Float, val esTransgenica: Boolean)
 
     return if (esTransgenica) horasBase * 2 else horasBase
   }
-
 
 
   override fun daSemillas(): Boolean  {
