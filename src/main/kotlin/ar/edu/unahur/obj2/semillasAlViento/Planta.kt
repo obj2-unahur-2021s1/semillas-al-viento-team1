@@ -1,13 +1,17 @@
 package ar.edu.unahur.obj2.semillasAlViento
 
 abstract class Planta(val anioObtencionSemilla: Int, var altura: Float) {
+//Se dice que una planta es fuerte si tolera más de 10 horas de sol al día, esto es igual
+// para todas las plantas. El cálculo de las horas de sol que tolera depende exclusivamente de cada especie (ver más abajo).
   fun esFuerte() = this.horasDeSolQueTolera() > 10
 
   fun parcelaTieneComplicaciones(parcela: Parcela) =
     parcela.plantas.any { it.horasDeSolQueTolera() < parcela.horasSolPorDia }
 
+
   abstract fun horasDeSolQueTolera(): Int
   abstract fun daSemillas(): Boolean
+
 }
 
 class Menta(anioObtencionSemilla: Int, altura: Float) : Planta(anioObtencionSemilla, altura) {
@@ -29,12 +33,9 @@ class Soja(anioObtencionSemilla: Int, altura: Float, val esTransgenica: Boolean)
   }
 
 
+
   override fun daSemillas(): Boolean  {
 
-    if (this.esTransgenica) {
-      return false
-    }
-     //Cohesion este metodo resuelve muchas tareas
-    return this.esFuerte() || (this.anioObtencionSemilla > 2007 && this.altura > 1)
+    return !this.esTransgenica || this.esFuerte() || (this.anioObtencionSemilla > 2007 && this.altura > 1)
   }
 }
