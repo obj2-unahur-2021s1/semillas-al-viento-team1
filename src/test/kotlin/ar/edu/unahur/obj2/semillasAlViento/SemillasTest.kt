@@ -4,8 +4,9 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
+
 class SemillasTest : DescribeSpec({
-    describe(("Semillas al viento"))
+    describe("Semillas al viento")
     {
         //Plantas
         val plantaDeMenta = Menta(3, 2.60f)
@@ -18,7 +19,7 @@ class SemillasTest : DescribeSpec({
         val parcela1 = Parcela(5, 4, 10)
         val parcela2 = Parcela(3, 4, 4)
         val parcela3 = Parcela(5, 7, 10)
-        v
+
         //Agricultores
         val agricultor1 = Agricultora(mutableListOf(parcela1))
 
@@ -57,18 +58,22 @@ class SemillasTest : DescribeSpec({
             
             it("tiene complicaciones") { //No existe la funcion para el test
                 parcela1.tieneComplicaciones().shouldBeFalse()
-                parcela1.plantar(plantaSojaTransgenica)
-                parcela1.tieneComplicaciones().shouldBeTrue()
-                parcela2.tieneComplicaciones().shouldBeTrue()
+                parcela3.plantar(plantaDeMenta)
+                parcela3.tieneComplicaciones().shouldBeFalse()
+                parcela3.plantar(plantaSojaComun)
+                parcela3.tieneComplicaciones().shouldBeTrue()
             }
         }
         describe("Requerimientos de agricultores")
         {
+            val plantaDeMenta2 = Menta(2015, 2.1f)
             parcela1.plantar(plantaSojaTransgenica)
             parcela2.plantar(plantaDeMenta)
             parcela2.plantar(plantaSojaComun)
             agricultor1.parcelasSemilleras().shouldBe(mutableListOf())
             agricultor2.parcelasSemilleras().shouldBe(mutableListOf(parcela2))
+
+            agricultor1.plantarEstrategicamente(plantaDeMenta2)
 
         }
 
