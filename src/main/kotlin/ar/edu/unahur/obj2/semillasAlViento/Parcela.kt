@@ -28,7 +28,7 @@ class Agricultora(val parcelas: MutableList<Parcela>) {
 
   // Suponemos que una parcela vale 5000 pesos
   fun comprarParcela(parcela: Parcela) {
-    if (ahorrosEnPesos >= 5000) {
+    if (ahorrosEnPesos >= 5000 ) {
       parcelas.add(parcela)
       ahorrosEnPesos -= 5000
     }
